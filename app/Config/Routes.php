@@ -40,7 +40,7 @@ $routes->get('create-db', function() {
         echo 'Database created!';
     }
 });
-
+$routes->post('gawe', 'Gawe::store');
 // $routes->get('/', 'Home::index');
 $routes->addRedirect('/', 'home');
 
