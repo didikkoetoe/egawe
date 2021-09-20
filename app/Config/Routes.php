@@ -43,6 +43,8 @@ $routes->get('create-db', function() {
 $routes->post('gawe', 'Gawe::store');
 // $routes->get('/', 'Home::index');
 $routes->addRedirect('/', 'home');
+$routes->get('gawe/edit/(:any)', 'Gawe::edit/$1');
+$routes->put('gawe/(:any)', 'Gawe::update/$1');
 
 /*
  * --------------------------------------------------------------------
