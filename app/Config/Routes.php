@@ -45,6 +45,7 @@ $routes->post('gawe', 'Gawe::store');
 $routes->addRedirect('/', 'home');
 $routes->get('gawe/edit/(:any)', 'Gawe::edit/$1');
 $routes->put('gawe/(:any)', 'Gawe::update/$1');
+$routes->delete('gawe/(:num)', 'Gawe::delete/$1');
 
 /*
  * --------------------------------------------------------------------
