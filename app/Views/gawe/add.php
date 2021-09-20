@@ -8,6 +8,7 @@
         <div class="section-header-button">
             <a href="<?= site_url('gawe'); ?>" class="btn"><i class="fas fa-arrow-left"></i></a>
         </div>
+        <h1>Create Gawe</h1>
     </div>
     <div class="section-body">
         <div class="card">
