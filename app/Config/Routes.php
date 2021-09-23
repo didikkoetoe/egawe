@@ -51,6 +51,9 @@ $routes->get('gawe/edit/(:any)', 'Gawe::edit/$1');
 $routes->put('gawe/(:any)', 'Gawe::update/$1');
 $routes->delete('gawe/(:num)', 'Gawe::delete/$1');
 
+// Routes presenter
+$routes->presenter('groups');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
