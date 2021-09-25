@@ -7,7 +7,7 @@
     <div class="section-header">
         <h1>Groups</h1>
         <div class="section-header-button">
-            <a href="<?= site_url('groups/add'); ?>" class="btn btn-primary">Add New</a>
+            <a href="<?= site_url('groups/new'); ?>" class="btn btn-primary">Add New</a>
         </div>
     </div>
     <!-- Alert -->
@@ -44,6 +44,27 @@
                                 <th>Info</th>
                                 <th>Action</th>
                             </tr>
+                            <?php foreach ($groups as $group => $value): ?>
+                            <tr>
+                                <td>
+                                    <?= $group + 1; ?>
+                                </td>
+                                <td>
+                                    <?= $value->name_group; ?>
+                                </td>
+                                <td>
+                                    <?= $value->info_group; ?>
+                                </td>
+                                <td class="text-center" style="width: 15%;">
+                                    <a href="<?= site_url('groups/edit/' . $value->id_group); ?>" class="btn btn-warning btn-sm"><i class="fas fa-pencil-alt"></i></a>
+                                    <form action="<?= site_url('gawe/'. $value->id_group); ?>" method="POST" onsubmit="return confirm('Yakin ingin menghapus data ?')" class="d-inline">
+                                        <?= csrf_field(); ?>
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php endforeach ?>
                         </tbody>
                     </table>
                 </div>
