@@ -6,6 +6,8 @@ use CodeIgniter\RESTful\ResourcePresenter;
 
 class Groups extends ResourcePresenter
 {
+    protected $modelName = 'App\Models\GroupModel';
+
     /**
      * Present a view of resource objects
      *
@@ -13,7 +15,8 @@ class Groups extends ResourcePresenter
      */
     public function index()
     {
-        return view('group/index');
+        $data['groups'] = $this->model->findAll();
+        return view('group/index', $data);
     }
 
     /**
@@ -46,7 +49,8 @@ class Groups extends ResourcePresenter
      */
     public function create()
     {
-        //
+        $this->model->insert($this->request->getPost());
+        return redirect()->to(site_url('groups'))->with('success', 'Data group berhasil di tambahkan.');
     }
 
     /**
@@ -58,7 +62,8 @@ class Groups extends ResourcePresenter
      */
     public function edit($id = null)
     {
-        //
+        $data['group'] = $this->model->where('id_group', $id)->first();
+        return view('group/edit', $data);
     }
 
     /**
@@ -71,7 +76,10 @@ class Groups extends ResourcePresenter
      */
     public function update($id = null)
     {
-        //
+        $data = $this->request->getVar();
+        $this->model->update($id, $data);
+
+        return redirect()->to(site_url('groups'))->with('success', 'Data group berhasil di update');
     }
 
     /**
