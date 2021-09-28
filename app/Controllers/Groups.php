@@ -103,6 +103,8 @@ class Groups extends ResourcePresenter
      */
     public function delete($id = null)
     {
-        //
+        $this->model->delete($id);
+
+        return \redirect()->to(\site_url('groups'))->with('success', 'Data berhasil di hapus');
     }
 }
