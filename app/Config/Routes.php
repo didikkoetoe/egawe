@@ -33,10 +33,9 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 
 // Database
-$routes->get('create-db', function() {
+$routes->get('create-db', function () {
     $forge = \Config\Database::forge();
-    if ($forge->createDatabase('yukNikah'))
-    {
+    if ($forge->createDatabase('yukNikah')) {
         echo 'Database created!';
     }
 });
