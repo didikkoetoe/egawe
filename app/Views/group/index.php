@@ -33,6 +33,9 @@
         <div class="card">
             <div class="card-header">
                 <h4>Data Group Kontak</h4>
+                <div class="card-header-action">
+                    <a href="<?= site_url('groups/trash'); ?>" class="btn btn-danger"><i class="fas fa-trash"></i> Trash</a>
+                </div>
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
