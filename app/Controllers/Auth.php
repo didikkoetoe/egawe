@@ -13,7 +13,7 @@ class Auth extends BaseController
 
 	public function login()
 	{
-		if(session('id_user')){
+		if (session('id_user')) {
 			return redirect()->to(site_url('home'));
 		}
 
@@ -24,8 +24,7 @@ class Auth extends BaseController
 	{
 		$post = $this->request->getPost();
 		$query = $this->db->table('users')->getWhere(['email_user' => $post['email']]);
-		$user = $query->getRow();
-		if ($user) {
+		if ($user = $query->getRow()) {
 			if (password_verify($post['password'], $user->password_user)) {
 				$params = ['id_user' => $user->id_user];
 				session()->set($params);
@@ -35,7 +34,7 @@ class Auth extends BaseController
 				return redirect()->back()->with('error', 'Password salah.');
 			}
 		} else {
-			return redirect()->back()->with('error', 'Email tidak ditemukan.');
+			return redirect()->back()->withInput()->with('error', 'Email tidak ditemukan.');
 		}
 	}
 
@@ -43,6 +42,6 @@ class Auth extends BaseController
 	{
 		session()->remove('id_user');
 
-		return redirect()->to(site_url('login'));
+		return redirect()->to(site_url('login'))->with('success', "Anda berhasil logout");
 	}
 }
