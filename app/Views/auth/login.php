@@ -27,22 +27,31 @@
                                 <h4>Login</h4>
                             </div>
                             <div class="card-body">
-                                <?php if (session()->getFlashdata('error')): ?>
-                                <div class="alert alert-danger alert-dismissible show fade">
-                                    <div class="alert-body">
-                                        <button class="close" data-dismiss="alert">x</button>
-                                        <b>Error !</b>
-                                        <?= session()->getFlashdata('error'); ?>
+                                <?php if (session()->getFlashdata('error')) : ?>
+                                    <div class="alert alert-danger alert-dismissible show fade">
+                                        <div class="alert-body">
+                                            <button class="close" data-dismiss="alert">x</button>
+                                            <b>Error !</b>
+                                            <?= session()->getFlashdata('error'); ?>
+                                        </div>
                                     </div>
-                                </div>
+                                <?php endif ?>
+                                <?php if (session()->getFlashdata('success')) : ?>
+                                    <div class="alert alert-success alert-dismissible show fade">
+                                        <div class="alert-body">
+                                            <button class="close" data-dismiss="alert">x</button>
+                                            <b>Success !</b>
+                                            <?= session()->getFlashdata('success'); ?>
+                                        </div>
+                                    </div>
                                 <?php endif ?>
                                 <form method="POST" action="<?= site_url('auth/loginProcess'); ?>" class="needs-validation" novalidate="">
-                                    <?= csrf_field(); ?>
+                                    <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>">
                                     <div class="form-group">
                                         <label for="email">Email</label>
                                         <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
                                         <div class="invalid-feedback">
-                                            Please fill in your email
+                                            Masukan email anda
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -56,7 +65,7 @@
                                         </div>
                                         <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                                         <div class="invalid-feedback">
-                                            Please fill in your password
+                                            Masukan password anda
                                         </div>
                                     </div>
                                     <div class="form-group">
