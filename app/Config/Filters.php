@@ -61,12 +61,14 @@ class Filters extends BaseConfig
      * @var array
      */
     public $filters = [
-        'isLoggedIn' => ['before' => 
-        [
-            'home',
-            'gawe',
-            'gawe/*'
+        'isLoggedIn' => [
+            'before' =>
+            [
+                'home',
+                'gawe',
+                'gawe/*',
+                'groups/*'
+            ]
         ]
-    ]
     ];
 }
