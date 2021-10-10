@@ -14,44 +14,49 @@
                             <a href="<?= site_url('login'); ?>" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Login</a>
                         </div>
                     </div>
-                    <?= $validation->listErrors() ?>
                     <div class="card-body">
-                        <form action="<?= site_url('Auth/create'); ?>" method="POST">
-                            <?= csrf_field(); ?>
+                        <form action="<?= site_url('Auth/create'); ?>" method="POST" class="needs-validation" novalidate="">
+                            <input type="hidden" name="<?= csrf_token(); ?>" value="<?= csrf_hash(); ?>">
                             <div class="row">
-                                <div class="form-group col-6">
-                                    <label for="first_name">First Name</label>
-                                    <input id="first_name" type="text" class="form-control" name="first_name" autofocus>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="last_name">Last Name</label>
-                                    <input id="last_name" type="text" class="form-control" name="last_name">
+                                <div class="form-group col-12">
+                                    <label for="full_name">Nama Lengkap</label>
+                                    <input id="full_name" type="text" class="form-control <?= ($validation->hasError('full_name')) ? 'is-invalid' : '' ; ?>" name="full_name" value="<?= old('full_name'); ?>" autofocus required>
+                                    <div class="invalid-feedback">
+                                        <?= ($validation->getError('full_name')) ? $validation->getError('full_name') : 'Nama lengkap harus di isi'; ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input id="email" type="email" class="form-control" name="email">
+                                <input id="email" type="email" class="form-control <?= ($validation->hasError('email')) ? 'is-invalid' : '' ; ?>" name="email" required autofocus value="<?= old('email'); ?>" placeholder="Contoh: abc@email.com">
                                 <div class="invalid-feedback">
+                                    <?= ($validation->getError('email')) ? $validation->getError('email') : 'Email harus di isi'; ?>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-6">
                                     <label for="password" class="d-block">Password</label>
-                                    <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator" name="password">
+                                    <input id="password" type="password" class="form-control pwstrength <?= ($validation->hasError('password')) ? 'is-invalid' : '' ; ?>" data-indicator="pwindicator" name="password" required value="<?= old('password'); ?>" placeholder="Minimal 8 karakter">
+                                    <div class="invalid-feedback">
+                                        <?= ($validation->getError('password')) ? $validation->getError('password') : 'Password harus di isi'; ?>
+                                    </div>
                                     <div id="pwindicator" class="pwindicator">
                                         <div class="bar"></div>
                                         <div class="label"></div>
                                     </div>
                                 </div>
                                 <div class="form-group col-6">
-                                    <label for="password2" class="d-block">Password Confirmation</label>
-                                    <input id="password2" type="password" class="form-control" name="password-confirm">
+                                    <label for="password2" class="d-block">Konfirmasi Password</label>
+                                    <input id="password2" type="password" class="form-control <?= ($validation->hasError('password2')) ? 'is-invalid' : '' ; ?>" name="password2" value="<?= old('password2'); ?>">
+                                    <div class="invalid-feedback">
+                                        <?= ($validation->getError('password2')) ? $validation->getError('password2') : 'Konfirmasi password harus di isi'; ?>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="agree" class="custom-control-input" id="agree">
-                                    <label class="custom-control-label" for="agree">I agree with the terms and conditions</label>
+                                    <input type="checkbox" name="agree" class="custom-control-input" id="agree" required>
+                                    <label class="custom-control-label" for="agree">Saya setuju dengan syarat dan ketentuan yang berlaku</label>
                                 </div>
                             </div>
                             <div class="form-group">
