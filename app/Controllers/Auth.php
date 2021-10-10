@@ -58,10 +58,50 @@ class Auth extends BaseController
 
 	public function create()
 	{
+		// dd($this->request->getVar());
 		if(!$this->validate([
-			'first_name' => 'required'
+			'full_name' => [
+				'rules' => 'required|string',
+				'errors' => [
+					'required' => 'Nama harus di isi',
+					'string' => 'Nama harus berupa karakter A-Z'
+				]
+			],
+			'email' => [
+				'rules' => 'required|valid_email',
+				'errors' => [
+					'required' => 'Email harus di isi',
+					'valid_email' => 'Email tidak valid'
+				]
+			],
+			'password' => [
+				'rules' => 'required|min_length[8]',
+				'errors' => [
+					'required' => 'Password harus di isi',
+					'min_length' => 'Password terlalu pendek. Minimal 8 karakter'
+				]
+			],
+			'password2' => [
+				'rules' => 'required|matches[password]',
+				'errors' => [
+					'required' => 'Konfirmasi password harus di isi',
+					'matches' => 'Konfirmasi password tidak sama'
+				]
+			]
 		])) {
 			return redirect()->to(site_url('Auth/new'))->withInput();
 		}
+
+		// Proses password user
+		$password = password_hash($this->request->getPost('password'), PASSWORD_BCRYPT);
+
+		// Proses data user
+		$this->db->table('users')->insert([
+			'name_user' => $this->request->getPost('full_name'),
+			'email_user' => $this->request->getPost('email'),
+			'password_user' => $password
+		]);
+
+		return redirect()->to(site_url('login'))->with('create', 'Akun anda berhasil terdaftar');
 	}
 }
