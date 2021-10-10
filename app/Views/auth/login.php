@@ -21,12 +21,16 @@
                             </div>
                         </div>
                         <?php endif ?>
-                        <?php if (session()->getFlashdata('success')) : ?>
+                        <?php if (session()->getFlashdata('success') || session()->getFlashdata('create')) : ?>
                         <div class="alert alert-success alert-dismissible show fade">
                             <div class="alert-body">
                                 <button class="close" data-dismiss="alert">x</button>
-                                <b>Success !</b>
+                                <b>Success ! </b>
+                                <?php if (session()->getFlashdata('success')): ?>
                                 <?= session()->getFlashdata('success'); ?>
+                                <?php elseif(session()->getFlashdata('create')) : ?>
+                                <?= session()->getFlashdata('create'); ?>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <?php endif ?>
@@ -68,7 +72,7 @@
                     </div>
                 </div>
                 <div class="mt-5 text-muted text-center">
-                    Don't have an account? <a href="<?= site_url('auth/new'); ?>">Create One</a>
+                    Tidak mempunya akun ? <a href="<?= site_url('auth/new'); ?>">Buat Akun</a>
                 </div>
                 <div class="simple-footer">
                     Copyright &copy; DidikPrabowo 2021
