@@ -17,7 +17,7 @@ class Auth extends BaseController
 			return redirect()->to(site_url('home'));
 		}
 
-		return view('auth/login');
+		return view('auth/login', ['title' => 'Login']);
 	}
 
 	public function loginProcess()
@@ -43,5 +43,25 @@ class Auth extends BaseController
 		session()->remove('id_user');
 
 		return redirect()->to(site_url('login'))->with('success', "Anda berhasil logout");
+	}
+
+	public function new()
+	{
+		session();
+		$data = [
+			'title' => 'Create Account',
+			'validation' => \Config\Services::validation()
+		];
+
+		return view('auth/new', $data);
+	}
+
+	public function create()
+	{
+		if(!$this->validate([
+			'first_name' => 'required'
+		])) {
+			return redirect()->to(site_url('Auth/new'))->withInput();
+		}
 	}
 }
