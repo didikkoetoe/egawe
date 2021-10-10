@@ -58,6 +58,9 @@ $routes->delete('groups/delete2', 'Groups::delete2');
 // Routes presenter
 $routes->presenter('groups', ['filter' => 'isLoggedIn']);
 
+// Routes controller
+$routes->resource('contacts', ['filter' => 'isLoggedIn']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
